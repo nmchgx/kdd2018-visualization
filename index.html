@@ -13,16 +13,30 @@
 
 <body>
     <div class="container">
-        <h1 class="title">北京空气污染物时序数据可视化</h1>
+        <h1 class="title">北京空气污染物时序数据散点图</h1>
         <div class="bar">
             <p>污染物种类：</p>
             <select name="pollution-type" id="pollution-type"></select>
         </div>
         <div class="box" id="pollution-box"></div>
-        <h1 class="title">北京风象时序数据可视化</h1>
+        <h1 class="title">北京风象时序数据散点图</h1>
         <div class="box" id="wind-box"></div>
         <h1 class="title">北京空气污染物热力图</h1>
-        <div class="box" id="heatmap-box"></div>
+        <div class="box">
+            <div id="wind-box-mini"></div>
+            <div class="img-box">
+                <p>湿度热力图</p>
+                <img id="humidity-heatmap" src="./data/humidity/00:00:00.png" />
+                <p>PM2.5热力图</p>
+                <img id="pollution-heatmap" src="./data/humidity/00:00:00.png" />
+            </div>
+        </div>
+        <h1 class="title">北京空气污染物站点数据折线图</h1>
+        <div class="bar">
+            <p>污染物种类：</p>
+            <select name="pollution-type-2" id="pollution-type-2"></select>
+        </div>
+        <div class="box" id="pollution-line-box"></div>
     </div>
 
     <script type="text/javascript" src="./js/jquery.min.js"></script>

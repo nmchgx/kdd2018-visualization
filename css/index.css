@@ -32,7 +32,8 @@ body {
     font-size: 14pt;
 }
 
-.bar p, .bar select {
+.bar p,
+.bar select {
     margin: auto 10px;
 }
 
@@ -42,4 +43,29 @@ body {
     margin: 20px 0 40px 0;
     border: 1px solid white;
     box-shadow: 0 0 10px #888888;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#wind-box-mini {
+    width: 50%;
+    height: 60%;
+}
+
+.img-box {
+    width: 40%;
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img-box img {
+    width: auto;
+    height: 300px;
+    max-width: 100%;
+    /* border: 1px solid white; */
+    /* max-height: 100%; */
 }
