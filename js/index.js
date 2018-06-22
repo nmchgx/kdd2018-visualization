@@ -623,7 +623,25 @@ function showPollutionLine(station, res) {
             lineStyle: {
                 color: '#eac736'
             }
-        }
+        },
+        dataZoom: [{
+            type: 'slider',
+            show: true,
+            xAxisIndex: [0],
+            start: 0,
+            end: 30,
+            textStyle: {
+                color: '#fff'
+            }
+        }, {
+            type: 'inside',
+            xAxisIndex: [0],
+            start: 0,
+            end: 30,
+            textStyle: {
+                color: '#fff'
+            }
+        }]
     }
 
     pollutionLineBox.setOption(option);
