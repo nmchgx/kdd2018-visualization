@@ -3,7 +3,6 @@ $(document).ready(function ($) {
     for (var i = 0; i < typeList.length; i++) {
         $("#pollution-type").append("<option value=" + typeList[i] + ">" + typeList[i] + "</option>");
     }
-
     var type = typeList[0];
     $("#pollution-type").val(type);
 
@@ -11,13 +10,25 @@ $(document).ready(function ($) {
         type = $(this).val();
         showPollution(type, 0, convertPollutionData(type, 0));
     });
-
     showPollution(type, 0, convertPollutionData(type, 0));
 
     // wind
     showWind();
 
+    // heatmap
     showHeatmap();
+
+    // pollution line
+    for (var i = 0; i < pollution_timeline.length; i++) {
+        $("#pollution-type-2").append("<option value=" + i + ">" + Object.keys(pollution_timeline[i])[0] + "</option>");
+    }
+    $("#pollution-type-2").val(0);
+
+    $("#pollution-type-2").change(function () {
+        station = $(this).val();
+        showPollutionLine(station, convertPollutionLineData(station));
+    });
+    showPollutionLine(0, convertPollutionLineData(0));
 
     if (window.CollectGarbage) {
         setInterval(function () {
@@ -27,6 +38,7 @@ $(document).ready(function ($) {
 });
 
 var pollutionBox = echarts.init(document.getElementById('pollution-box'));
+var pollutionLineBox = echarts.init(document.getElementById('pollution-line-box'));
 var typeList = ["PM2.5", "PM10", "CO", "SO2", "O3", "NO2"];
 
 var sizeFunction = function (x) {
@@ -42,7 +54,6 @@ var convertPollutionData = function (type, date) {
             value: [stationInfo[staion].longitude, stationInfo[staion].latitude, parseInt(pollution[date].data[staion][type])]
         });
     }
-    console.log(res)
     return res;
 };
 
@@ -56,7 +67,22 @@ var convertWindData = function (date) {
             symbolRotate: item.wind_direction
         });
     }
-    console.log(res)
+    return res;
+};
+
+var convertPollutionLineData = function (station) {
+    var res = {};
+    var label = [];
+    var data = [];
+    var pt = Object.values(pollution_timeline[station])[0];
+    for (var i = 0; i < pt.length; i++) {
+        var date = Object.keys(pt[i])[0];
+        var value = Object.values(pt[i])[0]
+        label.push(date);
+        data.push(value);
+    }
+    res['label'] = label;
+    res['data'] = data;
     return res;
 };
 
@@ -545,9 +571,59 @@ function showHeatmap() {
     }
 
     chart.on('timelinechanged', function (params) {
-        console.log(wind[params.currentIndex].date);
         $("#humidity-heatmap").attr('src', './data/humidity/' + wind[params.currentIndex].date + '.png');
     });
 
     chart.setOption(option);
+};
+
+function showPollutionLine(station, res) {
+    console.log(res)
+    pollutionLineBox.clear();
+    var option = {
+        animationDurationUpdate: 1000,
+        animationEasingUpdate: 'quinticInOut',
+        backgroundColor: '#404a59',
+        title: {
+            text: Object.keys(pollution_timeline[station])[0],
+            left: '10',
+            top: '10',
+            textStyle: {
+                fontSize: 20,
+                color: 'rgba(255, 255, 255, 0.7)'
+            }
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: function (params) {
+                return params.name + ' : ' + params.value;
+            }
+        },
+        xAxis: {
+            type: 'category',
+            data: res.label,
+            axisLine: {
+                lineStyle: {
+                    color: '#fff'
+                }
+            }
+        },
+        yAxis: {
+            axisLine: {
+                lineStyle: {
+                    color: '#fff'
+                }
+            }
+        },
+        series: {
+            name: Object.keys(pollution_timeline[station])[0],
+            type: 'line',
+            data: res.data,
+            lineStyle: {
+                color: '#eac736'
+            }
+        }
+    }
+
+    pollutionLineBox.setOption(option);
 };
