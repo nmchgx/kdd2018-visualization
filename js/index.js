@@ -145,7 +145,7 @@ function showPollution(type, tempDate, data) {
                 left: '20',
                 top: '60',
                 textStyle: {
-                    fontSize: 60,
+                    fontSize: 40,
                     color: 'rgba(255, 255, 255, 0.7)'
                 }
             }, {
@@ -307,7 +307,7 @@ function showWind() {
                 left: '20',
                 top: '60',
                 textStyle: {
-                    fontSize: 60,
+                    fontSize: 40,
                     color: 'rgba(255, 255, 255, 0.7)'
                 }
             }, {
@@ -572,6 +572,7 @@ function showHeatmap() {
 
     chart.on('timelinechanged', function (params) {
         $("#humidity-heatmap").attr('src', './data/humidity/' + wind[params.currentIndex].date + '.png');
+        $("#pollution-heatmap").attr('src', './data/pm25/' + wind[params.currentIndex].date + '.png');
     });
 
     chart.setOption(option);
