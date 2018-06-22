@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kdd2018-visualization</title>
+
+    <!-- <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">北京空气污染物时序数据可视化</h1>
+        <div class="bar">
+            <p>污染物种类：</p>
+            <select name="pollution-type" id="pollution-type"></select>
+        </div>
+        <div class="box" id="pollution-box"></div>
+        <h1 class="title">北京风象时序数据可视化</h1>
+        <div class="box" id="wind-box"></div>
+        <h1 class="title">北京空气污染物热力图</h1>
+        <div class="box" id="heatmap-box"></div>
+    </div>
+
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/echarts.min.js"></script>
+    <script type="text/javascript" src="./js/beijing.js"></script>
+    <script type="text/javascript" src="./js/theme/dark.js"></script>
+    <script type="text/javascript" src="./data/stationInfo.js"></script>
+    <script type="text/javascript" src="./data/pollution.js"></script>
+    <script type="text/javascript" src="./data/wind.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+</body>
+
+</html>
